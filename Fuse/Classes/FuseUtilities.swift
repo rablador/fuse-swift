@@ -54,7 +54,7 @@ class FuseUtilities {
     /// - Parameter mask: A string representing the value to search for.
     ///
     /// - Returns: `CountableClosedRange<Int>` array.
-    static func findRanges(_ mask: [Int]) -> [CountableClosedRange<Int>] {
+    static func findRanges(_ mask: [Int]) -> [ClosedRange<Int>] {
         var ranges = [CountableClosedRange<Int>]()
         var start: Int = -1
         var end: Int = -1
@@ -63,12 +63,12 @@ class FuseUtilities {
                 start = n
             } else if bit == 0 && start != -1 {
                 end = n - 1
-                ranges.append(CountableClosedRange<Int>(start...end))
+                ranges.append(start...end)
                 start = -1
             }
         }
         if mask.last == 1 {
-            ranges.append(CountableClosedRange<Int>(start...mask.count - 1))
+            ranges.append(start...mask.count - 1)
         }
         return ranges
     }
